@@ -857,7 +857,7 @@ void set_model_defaults(scannerType* scanner)
         scanner->QTY_Required = QTY_NOT_REQUIRED;
         scanner->Full_Keypad =1;
         scanner->BT_Model = 1;
-        scanner->GPS_Model = 1;
+        scanner->GPS_Model = 0;
 
         strcpy(scanner->Sys_menu_options,"11111111111");
         strcpy(scanner->Interface_options,"11110");
