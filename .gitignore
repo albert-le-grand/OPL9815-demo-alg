@@ -1,0 +1,7 @@
+/*.elf
+/*.hex
+/*.map
+
+/obj/*.o
+/obj/*.d
+/obj/*.lst
