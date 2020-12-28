@@ -10,7 +10,7 @@
 TERMINAL_TYPE=OPL9815
 # List the application version here. Note that this may not be larger than 15 characters or you will get a linker error! 
 # The OS can read this version and show it in the system menu.
-VERSION=XFOS0878
+VERSION=ALG0879
 
 # The final output file we want to create. The extention is always .hex and this should not be added to the name here.
 TARGET = $(VERSION)

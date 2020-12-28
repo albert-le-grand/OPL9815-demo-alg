@@ -905,7 +905,7 @@ void display_splash_screen_no_waitkey(void)
     int x;    //determines the x position for each so the line will be cetralized
 
     strcpy(splash_msg.L1,"Opticon Inc.");
-    strcpy(splash_msg.L2,"Demo");
+    strcpy(splash_msg.L2,"Demo / ALG");
     strcpy(splash_msg.L3,"Application");
 
     clear_screen();
@@ -935,7 +935,7 @@ void display_splash_screen(void)
     int x;    //determines the x position for each so the line will be cetralized
 
     strcpy(splash_msg.L1,"Opticon Inc.");
-    strcpy(splash_msg.L2,"Demo");
+    strcpy(splash_msg.L2,"Demo / ALG");
     strcpy(splash_msg.L3,"Application");
 
     clear_screen();
