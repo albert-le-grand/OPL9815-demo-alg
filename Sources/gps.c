@@ -278,7 +278,7 @@ void GPSStart(void)
         g_BreadCrumbTime = BREAD_CRUMB_TRAIL_TIME;
         g_BreadCrumbFlag = TRUE;
     }
-	GpsPower(GPS_ON);
+	GpsPower(GPS_OFF);
 	for(status=0;status != 3;)
 	{
 		if (GpsGetFrame(buffer,100) == ERROR)
