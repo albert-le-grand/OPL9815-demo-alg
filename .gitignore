@@ -5,3 +5,5 @@
 /obj/*.o
 /obj/*.d
 /obj/*.lst
+
+.\Sources\app_version.c
