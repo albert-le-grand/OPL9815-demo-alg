@@ -895,6 +895,10 @@ void set_model_defaults(scannerType* scanner)
     }
 }
 
+static int centered(char* txt) {
+    return (14 - strlen(txt))/2;
+}
+
 //------------------------------------------------------------------
 //	display_splash_screen_no_waitkey
 //  ============================
@@ -902,24 +906,18 @@ void set_model_defaults(scannerType* scanner)
 //------------------------------------------------------------------
 void display_splash_screen_no_waitkey(void)
 {
-    int x;    //determines the x position for each so the line will be cetralized
-
-    strcpy(splash_msg.L1,"Opticon Inc.");
-    strcpy(splash_msg.L2,"Demo / ALG");
-    strcpy(splash_msg.L3,"Application");
+    strcpy(splash_msg.L1,"Albert");
+    strcpy(splash_msg.L2,"le");
+    strcpy(splash_msg.L3,"Grand");
 
     clear_screen();
-
     setfont( LARGE_FONT, NULL );
-    x = (14 - strlen(splash_msg.L1))/2;
 
-    gotoxy(x,0);
+    gotoxy(centered(splash_msg.L1),0);
     printf("%s",splash_msg.L1);
-    x = (14 - strlen(splash_msg.L2))/2;
-    gotoxy(x,1);
+    gotoxy(centered(splash_msg.L2),1);
     printf("%s",splash_msg.L2);
-    x = (14- strlen(splash_msg.L3))/2;
-    gotoxy(x,2);
+    gotoxy(centered(splash_msg.L3),2);
     printf("%s",splash_msg.L3);
 }
 
@@ -932,24 +930,18 @@ void display_splash_screen_no_waitkey(void)
 //------------------------------------------------------------------
 void display_splash_screen(void)
 {
-    int x;    //determines the x position for each so the line will be cetralized
-
-    strcpy(splash_msg.L1,"Opticon Inc.");
-    strcpy(splash_msg.L2,"Demo / ALG");
-    strcpy(splash_msg.L3,"Application");
+    strcpy(splash_msg.L1,"Albert");
+    strcpy(splash_msg.L2,"le");
+    strcpy(splash_msg.L3,"Grand");
 
     clear_screen();
 
     setfont( LARGE_FONT, NULL );
-    x = (14 - (int)strlen(splash_msg.L1))/2;
-
-    gotoxy(x,0);
+    gotoxy(centered(splash_msg.L1),0);
     printf("%s",splash_msg.L1);
-    x = (14 - (int)strlen(splash_msg.L2))/2;
-    gotoxy(x,1);
+    gotoxy(centered(splash_msg.L2),1);
     printf("%s",splash_msg.L2);
-    x = (14- (int)strlen(splash_msg.L3))/2;
-    gotoxy(x,2);
+    gotoxy(centered(splash_msg.L3),2);
     printf("%s",splash_msg.L3);
 
     print_message_bar( MB_ALL );     //press any key bar
