@@ -855,7 +855,7 @@ void main_scroll( void )
 		return;
 	}
 
-	current = 0L;
+	current = fsize( (char*)DATA_BASE ) / SZ_RECORD; // start with last element
 	if ( get_record( &db_rec, &current, &max ) < 0 )
 	{
 		errbeep();
