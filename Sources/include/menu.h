@@ -93,11 +93,7 @@
 #define SZ_BARCODE	200
 #define SZ_SIGN		1
 #define SZ_QUANTITY	8
-#define SZ_DATE		10
-#define SZ_TIME		8
-#define SZ_LONGITUDE LONGITUDE_DMS
-#define SZ_LATITUDE  LATITUDE_DMS
-#define SZ_RECORD	( SZ_BARCODE +1+ SZ_SIGN+ SZ_QUANTITY+1+SZ_DATE+1+SZ_TIME+2+SZ_LATITUDE+1+SZ_LONGITUDE+1 )
+#define SZ_RECORD	( SZ_BARCODE +1+ SZ_SIGN+ SZ_QUANTITY+1 )
 
 #define ID_115200	1
 #define ID_57600    2
@@ -162,10 +158,6 @@ typedef struct
 {
     char barcode[ SZ_BARCODE +1 ];
     char quantity[ SZ_SIGN+ SZ_QUANTITY+1 ];
-    char time[ SZ_TIME+1 ];
-    char date[ SZ_DATE+1 ];
-    char longitude[LONGITUDE_DMS+1];
-    char latitude[LATITUDE_DMS+1];
 }db_record;
 
 
