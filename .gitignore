@@ -6,4 +6,4 @@
 /obj/*.d
 /obj/*.lst
 
-.\Sources\app_version.c
+/Sources/app_version.c
