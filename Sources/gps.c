@@ -702,13 +702,9 @@ void GPSSaveBreadCrumb(void)
 
     // mske the quantity string
     sprintf(pszBreadCrumbQty, "%*ld", SZ_SIGN+SZ_QUANTITY, nBreadCrumbNumber);
-    sprintf(record, "%-*.*s,%-*.*s,%-*.*s,%-*.*s,%-*.*s,%-*.*s\r\n",
+    sprintf(record, "%-*.*s,%-*.*s\r\n",
             SZ_BARCODE, SZ_BARCODE, db_rec.barcode,
-            SZ_SIGN+SZ_QUANTITY, SZ_SIGN+SZ_QUANTITY, db_rec.quantity,
-            SZ_TIME, SZ_TIME, db_rec.time,
-            SZ_DATE, SZ_DATE, db_rec.date,
-            SZ_LATITUDE, SZ_LATITUDE, db_rec.latitude,
-            SZ_LONGITUDE, SZ_LONGITUDE, db_rec.longitude);
+            SZ_SIGN+SZ_QUANTITY, SZ_SIGN+SZ_QUANTITY, db_rec.quantity);
     // append the bread crumb to the file
     lseek( fd, 0L, SEEK_END );
 

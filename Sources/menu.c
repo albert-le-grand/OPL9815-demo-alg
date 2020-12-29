@@ -3982,8 +3982,8 @@ void disp_no_database( void )
 //------------------------------------------------------------------
 void display_scroll_data( db_record *db_rec, long curr, long max, int infoType )
 {
-	char pszShortLatitude[12];
-	char pszShortLongitude[12];
+	// char pszShortLatitude[12];
+	// char pszShortLongitude[12];
 	int nBreadCrumbMatch;
 	int fSmallDisplay = FALSE;
 	char pszShortBarCode[19];
@@ -4036,82 +4036,7 @@ void display_scroll_data( db_record *db_rec, long curr, long max, int infoType )
 			}
 		}
 
-		gotoxy(0,3);
-		if (infoType == 0)
-		{
-			printf("%-8.8s %-10.10s ", db_rec->time, db_rec->date );
-		}
-		else
-		{
-			// display GPS
-			// shorten the coordinates by 2 decimal places so it fits the display
-			if(fSmallDisplay == FALSE)
-			{
-				strncpy(pszShortLatitude, db_rec->latitude, LATITUDE-3);
-				// write the direction letter
-				pszShortLatitude[LATITUDE-3] = db_rec->latitude[LATITUDE-1];
-				pszShortLatitude[LATITUDE-2] = '\0';
-				strncpy(pszShortLongitude, db_rec->longitude, LONGITUDE-3);
-				pszShortLongitude[LONGITUDE-3] = db_rec->longitude[LONGITUDE-1];
-				// write the direction letter
-				pszShortLongitude[LONGITUDE-2] = '\0';
-				printf("%s,%s ", pszShortLatitude, pszShortLongitude);
-			}
-			else
-			{
-				setoffset(6);
-				strncpy(pszShortLatitude, db_rec->latitude, LATITUDE_DMS-3);
-				// write the direction letter
-				pszShortLatitude[LATITUDE_DMS-3] = db_rec->latitude[LATITUDE_DMS-1];
-				pszShortLatitude[LATITUDE_DMS-2] = '\0';
-				strncpy(pszShortLongitude, db_rec->longitude, LONGITUDE_DMS-3);
-				pszShortLongitude[LONGITUDE_DMS-3] = db_rec->longitude[LONGITUDE_DMS-1];
-				// write the direction letter
-				pszShortLongitude[LONGITUDE_DMS-2] = '\0';
-				printf("%s,  ", db_rec->latitude);
-				gotoxy(0,4);
-				printf("%s  ", db_rec->longitude);
-			}
-		}
 	}
-	else
-	{
-		// special display
-		// disregard the info type and show the date/time and GPS coordinates
-		gotoxy(0,2);
-		printf("%-8.8s %-10.10s ", db_rec->time, db_rec->date );
-		gotoxy(0,3);
-		// display GPS
-		// shorten the coordinates by 2 decimal places so it fits the display
-		if(fSmallDisplay == FALSE)
-		{
-			strncpy(pszShortLatitude, db_rec->latitude, LATITUDE-3);
-			// write the direction letter
-			pszShortLatitude[LATITUDE-3] = db_rec->latitude[LATITUDE-1];
-			pszShortLatitude[LATITUDE-2] = '\0';
-			strncpy(pszShortLongitude, db_rec->longitude, LONGITUDE-3);
-			pszShortLongitude[LONGITUDE-3] = db_rec->longitude[LONGITUDE-1];
-			// write the direction letter
-			pszShortLongitude[LONGITUDE-2] = '\0';
-			printf("%s,%s ", pszShortLatitude, pszShortLongitude);
-		}
-		else
-		{
-			setoffset(6);
-			strncpy(pszShortLatitude, db_rec->latitude, LATITUDE_DMS-3);
-			// write the direction letter
-			pszShortLatitude[LATITUDE_DMS-3] = db_rec->latitude[LATITUDE_DMS-1];
-			pszShortLatitude[LATITUDE_DMS-2] = '\0';
-			strncpy(pszShortLongitude, db_rec->longitude, LONGITUDE_DMS-3);
-			pszShortLongitude[LONGITUDE_DMS-3] = db_rec->longitude[LONGITUDE_DMS-1];
-			// write the direction letter
-			pszShortLongitude[LONGITUDE_DMS-2] = '\0';
-			printf("%s,", db_rec->latitude);
-			gotoxy(0,4);
-			printf("%s", db_rec->longitude);
-		}
-	}
-
 	setoffset( 0 );
 
 	print_message_bar( SCROLL_BAR );
@@ -4130,15 +4055,6 @@ void fill_record_struct( db_record *db_rec, char* record )
 	memcpy( db_rec->barcode, record+offset, SZ_BARCODE );
 	offset+=SZ_BARCODE+1;
 	memcpy( db_rec->quantity, record+offset, SZ_SIGN+SZ_QUANTITY );
-	offset+= SZ_SIGN+SZ_QUANTITY+1;
-	memcpy( db_rec->time, record+offset, SZ_TIME );
-	offset+= SZ_TIME+1;
-	memcpy( db_rec->date, record+offset, SZ_DATE );
-	// load GPS coordinates
-	offset+= SZ_DATE+1;
-	memcpy( db_rec->latitude, record+offset, SZ_LATITUDE);
-	offset+= SZ_LATITUDE+1;
-	memcpy( db_rec->longitude, record+offset, SZ_LONGITUDE);
 }
 
 //------------------------------------------------------------------
@@ -4337,13 +4253,13 @@ void set_time_and_date(void)
 
 		switch ( KAwaitkey( battery_type ))
 		{
-		case UP_KEY: // to right
-		x++;
-		direction = 1;
-		break;
-		case DOWN_KEY: // to left
-			x--;
-			direction = -1;
+		case UP_KEY: // to left
+		    x--;
+		    direction = -1;
+		    break;
+		case DOWN_KEY: // to right
+			x++;
+			direction = +1;
 			break;
 		case TRIGGER_KEY:
 			if ('E' == (( y == 2)? time_str[x]:date_str[x]))
@@ -5276,15 +5192,15 @@ void update_quantity_rec_struct( db_record *db_rec, long quantity )
 	gettime( &t );
 
 	sprintf( db_rec->quantity, "%*ld", SZ_SIGN + SZ_QUANTITY, quantity );
-	sprintf( db_rec->time, "%02d:%02d:%02d", t.ti_hour, t.ti_min, t.ti_sec );
-	sprintf( db_rec->date, "%02d/%02d/%04d", d.da_day, d.da_mon, d.da_year );
+	// sprintf( db_rec->time, "%02d:%02d:%02d", t.ti_hour, t.ti_min, t.ti_sec );
+	// sprintf( db_rec->date, "%02d/%02d/%04d", d.da_day, d.da_mon, d.da_year );
 
 	// update GPS cordinates
 	if (scanner.GPS_Model == 1)
 	{
 		// save latitude and longitude
-		strcpy(db_rec->latitude, g_Latitude);
-		strcpy(db_rec->longitude,  g_Longitude);
+		// strcpy(db_rec->latitude, g_Latitude);
+		// strcpy(db_rec->longitude,  g_Longitude);
 	}
 }
 
@@ -5305,22 +5221,6 @@ void create_db_rec_struct( db_record *db_rec, char* barcode, long quantity )
 	memset(db_rec->barcode, 0, SZ_BARCODE);
 	memcpy(db_rec->barcode, barcode, strlen(barcode)+1);
 	sprintf( db_rec->quantity, "%*ld", SZ_SIGN + SZ_QUANTITY, quantity );
-	sprintf( db_rec->time, "%02d:%02d:%02d", t.ti_hour, t.ti_min, t.ti_sec );
-	sprintf( db_rec->date, "%02d/%02d/%04d", d.da_day, d.da_mon, d.da_year );
-
-
-	// add GPS cordinates
-	if ((scanner.GPS_Model == 1) && (g_gpsfix != 0))
-	{
-		// save latitude and longitude
-		strcpy(db_rec->latitude, g_Latitude);
-		strcpy(db_rec->longitude,  g_Longitude);
-	} else
-	{
-		// save empty coordinates
-		strcpy(db_rec->latitude, g_EmptyLatitude);
-		strcpy(db_rec->longitude,  g_EmptyLongitude);
-	}
 }
 
 //------------------------------------------------------------------
@@ -5392,13 +5292,9 @@ void save_data( db_record *db_rec, long pos )
 	}
 
 	// record with GPS
-	sprintf(record, "%-*.*s,%-*.*s,%-*.*s,%-*.*s,%-*.*s,%-*.*s\r\n",
+	sprintf(record, "%-*.*s,%-*.*s\r\n",
 			SZ_BARCODE, SZ_BARCODE, db_rec->barcode,
-			SZ_SIGN+SZ_QUANTITY, SZ_SIGN+SZ_QUANTITY, db_rec->quantity,
-			SZ_TIME, SZ_TIME, db_rec->time,
-			SZ_DATE, SZ_DATE, db_rec->date,
-			SZ_LATITUDE, SZ_LATITUDE, db_rec->latitude,
-			SZ_LONGITUDE, SZ_LONGITUDE, db_rec->longitude );
+			SZ_SIGN+SZ_QUANTITY, SZ_SIGN+SZ_QUANTITY, db_rec->quantity );
 
 	// suspend GPS bread crumb
 	if(g_BreadCrumbFlag == TRUE)
